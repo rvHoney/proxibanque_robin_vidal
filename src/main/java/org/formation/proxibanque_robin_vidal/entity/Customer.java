@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employee {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,17 +19,16 @@ public class Employee {
 
     private String firstName;
     private String lastName;
-    private String login;
-    private String password;
+    private String address;
+    private String zipCode;
+    private String city;
+    private String phoneNumber;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
-    @ManyToOne 
-    @JoinColumn(name = "agency_id")
-    private Agency agency;
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<Customer> customers;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Account> accounts;
 }
 
