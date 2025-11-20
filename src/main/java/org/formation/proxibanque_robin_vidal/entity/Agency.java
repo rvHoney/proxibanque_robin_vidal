@@ -24,8 +24,8 @@ public class Agency {
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
-//    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
-//    private List<Employee> employees;
+    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL)
+    private List<Employee> employees;
 
     public Agency(String authCode, Date creationDate) {
         this.authCode = authCode;

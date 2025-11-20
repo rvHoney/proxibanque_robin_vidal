@@ -15,16 +15,6 @@ import java.util.Optional;
 public class AgencyServiceImpl implements AgencyService {
     private final AgencyRepository agencyRepository;
 
-    @PostConstruct
-    private void initDb() {
-        agencyRepository.saveAll(List.of(
-            new Agency("0001", new Date()),
-            new Agency("0002", new Date()),
-            new Agency("0003", new Date()),
-            new Agency("0004", new Date())
-        ));
-    }
-
     @Override
     public List<Agency> getAgencies() {
         return agencyRepository.findAll();
