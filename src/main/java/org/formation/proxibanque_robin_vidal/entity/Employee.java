@@ -25,7 +25,7 @@ public abstract class Employee {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToOne
+    @ManyToOne 
     @JoinColumn(name = "agency_id")
     private Agency agency;
 }

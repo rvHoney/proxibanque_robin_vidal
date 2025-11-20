@@ -1,6 +1,8 @@
 package org.formation.proxibanque_robin_vidal.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.formation.proxibanque_robin_vidal.dto.EmployeeCreateDTO;
+import org.formation.proxibanque_robin_vidal.dto.EmployeeResponseDTO;
 import org.formation.proxibanque_robin_vidal.entity.Employee;
 import org.formation.proxibanque_robin_vidal.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
@@ -14,24 +16,24 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping("employees")
-    List<Employee> getEmployees() {
+    List<EmployeeResponseDTO> getEmployees() {
         return employeeService.getEmployees();
     }
 
     @PostMapping("employees")
-    Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.createEmployee(employee);
+    EmployeeCreateDTO createEmployee(@RequestBody EmployeeCreateDTO employeeDTO) {
+        return employeeService.createEmployee(employeeDTO);
     }
 
     @GetMapping("employees/{id}")
-    ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
+    ResponseEntity<EmployeeResponseDTO> getEmployee(@PathVariable Long id) {
         return employeeService.getEmployee(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("employees/{id}")
-    public ResponseEntity<Employee> replaceEmployee(@PathVariable Long id, @RequestBody Employee employee) {
-        Employee employeeReplaced = employeeService.replaceEmployee(id, employee);
+    public ResponseEntity<EmployeeResponseDTO> replaceEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        EmployeeResponseDTO employeeReplaced = employeeService.replaceEmployee(id, employee);
         return this.getEmployee(employeeReplaced.getId());
     }
 }
