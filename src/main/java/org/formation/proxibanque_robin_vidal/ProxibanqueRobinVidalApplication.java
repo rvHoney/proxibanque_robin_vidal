@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ProxibanqueRobinVidalApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProxibanqueRobinVidalApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ProxibanqueRobinVidalApplication.class, args);
+    }
 
 }
