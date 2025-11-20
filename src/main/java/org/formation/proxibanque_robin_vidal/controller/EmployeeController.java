@@ -11,27 +11,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/employees")
 @RequiredArgsConstructor
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @GetMapping("employees")
+    @GetMapping
     List<EmployeeResponseDTO> getEmployees() {
         return employeeService.getEmployees();
     }
 
-    @PostMapping("employees")
+    @PostMapping
     EmployeeCreateDTO createEmployee(@RequestBody EmployeeCreateDTO employeeDTO) {
         return employeeService.createEmployee(employeeDTO);
     }
 
-    @GetMapping("employees/{id}")
+    @GetMapping("/{id}")
     ResponseEntity<EmployeeResponseDTO> getEmployee(@PathVariable Long id) {
         return employeeService.getEmployee(id).map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("employees/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<EmployeeResponseDTO> replaceEmployee(@PathVariable Long id, @RequestBody Employee employee) {
         EmployeeResponseDTO employeeReplaced = employeeService.replaceEmployee(id, employee);
         return this.getEmployee(employeeReplaced.getId());

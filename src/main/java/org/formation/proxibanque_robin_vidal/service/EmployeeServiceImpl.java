@@ -3,11 +3,8 @@ package org.formation.proxibanque_robin_vidal.service;
 import lombok.RequiredArgsConstructor;
 import org.formation.proxibanque_robin_vidal.dto.EmployeeCreateDTO;
 import org.formation.proxibanque_robin_vidal.dto.EmployeeResponseDTO;
-import org.formation.proxibanque_robin_vidal.entity.Advisor;
 import org.formation.proxibanque_robin_vidal.entity.Agency;
 import org.formation.proxibanque_robin_vidal.entity.Employee;
-import org.formation.proxibanque_robin_vidal.entity.Manager;
-import org.formation.proxibanque_robin_vidal.entity.Role;
 import org.formation.proxibanque_robin_vidal.repository.AgencyRepository;
 import org.formation.proxibanque_robin_vidal.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -32,19 +29,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeCreateDTO createEmployee(EmployeeCreateDTO employeeDTO) {
         Agency agency = agencyRepository.findById(employeeDTO.getAgencyId())
-                .orElseThrow(() -> new RuntimeException("Agency not: " + employeeDTO.getAgencyId()));
+                .orElseThrow(() -> new RuntimeException());
 
-        Employee employee;
-        if (employeeDTO.getRole() == Role.ADVISOR) {
-            Advisor advisor = new Advisor();
-            employee = advisor;
-        } else if (employeeDTO.getRole() == Role.MANAGER) {
-            Manager manager = new Manager();
-            employee = manager;
-        } else {
-            throw new RuntimeException("Invalid role: " + employeeDTO.getRole());
-        }
-
+        Employee employee = new Employee();
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());
         employee.setLogin(employeeDTO.getLogin());
